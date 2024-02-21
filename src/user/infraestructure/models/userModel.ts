@@ -1,4 +1,4 @@
-import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { Column, DataType, Model, Table } from "sequelize-typescript";
 
 @Table({
     tableName: "users",
@@ -16,13 +16,20 @@ class UserModel extends Model{
         type: DataType.STRING(128),
         allowNull: false
     })
-    public name!: string;
+    public nombres!: string;
 
     @Column({
         type: DataType.STRING(128),
         allowNull: false
     })
-    public last_name!: string;
+    public apellido_paterno!: string;
+
+    @Column({
+        type: DataType.STRING(128),
+        allowNull: false
+    })
+    public apellido_materno!: string;
+
 
     @Column({
         type: DataType.STRING,

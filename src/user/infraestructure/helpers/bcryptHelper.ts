@@ -1,7 +1,7 @@
-import { BcryptRepository } from "../../application/services/bcryptService";
+import { BcryptOptions } from "../../domain/services/Bcrypt";
 import bcrypt from "bcrypt";
 
-export class BcryptHelper implements BcryptRepository{
+export class BcryptHelper implements BcryptOptions{
     async encryptPass(password:string): Promise<string>{
         const salts= 10;
         let hashPass= await bcrypt.hash(password, salts)
