@@ -1,0 +1,24 @@
+###
+GET http://localhost:3000/user HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombres": "Michel",
+    "password": "michi123"
+}
+
+###
+GET http://localhost:3000/user/all HTTP/1.1
+
+###
+POST http://localhost:3000/user HTTP/1.1
+Content-Type: application/json 
+
+{
+    "nombres": "si afhsdhfshdfs",
+    "apellido_paterno": "ggfgd",
+    "apellido_materno":"fdgdfgdfgd",
+    "numero_telefono": "9671941293",
+    "email":"jrmich3@hotmail.com",
+    "password":"michi123"
+}

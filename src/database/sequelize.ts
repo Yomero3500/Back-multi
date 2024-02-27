@@ -1,7 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import dotenv from "dotenv";
-import UserModel from "../user/infraestructure/model/userModel";
-import BookModel from "../book/infraestucture/model/bookModel";
+import UserModel from "../user/infraestructure/models/userModel";
 dotenv.config();
 
 export const sequelize = new Sequelize({
@@ -11,10 +10,8 @@ export const sequelize = new Sequelize({
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     port: 3306,
-    models: [UserModel, BookModel],
+    models: [UserModel],
 });
-
-
 
 export async function initialDataBase() {
     try {
@@ -24,15 +21,6 @@ export async function initialDataBase() {
         await sequelize.sync({force: false});
     } catch (error) {
         console.log(' No se pudo conectar a la base de datos', error);
-        process.exit(1);
-    }
-}
-
-export async function finalDataBase() {
-    try {
-        await sequelize.close()
-    } catch (error) {
-        console.log(error);
         process.exit(1);
     }
 }

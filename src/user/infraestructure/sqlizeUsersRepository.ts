@@ -4,26 +4,26 @@ import UserModel from './models/userModel'
 
 export class SqlizeUserRepository implements UserRepository{
 
-    async addUser(name: string, last_name: string, password: string): Promise<User | null>{
+    async addUser(nombres: string, apellido_paterno: string, apellido_materno:string, email:string, password: string): Promise<User | null>{
         try {
-            const createdUser = await UserModel.create({name, last_name, password});
-            return new User(createdUser.id ,createdUser.nombres, createdUser.apellido_paterno, createdUser.apellido_materno, createdUser.password);
+            const createdUser = await UserModel.create({nombres,apellido_paterno, apellido_materno, email, password});
+            return new User(createdUser.id ,createdUser.nombres, createdUser.apellido_paterno, createdUser.apellido_materno, createdUser.email, createdUser.password);
         } catch (error) {
-            console.log("Error en Sqlte agregarUser>",error);
+            console.log("Error en Sqlize agregarUser>",error);
             return null;
         }
     };
 
-    async getUser(id: number): Promise<User | null> {
+    async getUser(nombres: string, password: string): Promise<User | null> {
         try {
-            const searchedUser = await UserModel.findOne({where:{ id: id}})
+            const searchedUser = await UserModel.findOne({where:{nombres: nombres, password: password}})
             if (searchedUser) {
-                return new User(searchedUser.id , searchedUser.nombres, searchedUser.apellido_paterno, searchedUser.apellido_materno, searchedUser.password);
+                return new User(searchedUser.id , searchedUser.nombres, searchedUser.apellido_paterno, searchedUser.apellido_materno, searchedUser.email, searchedUser.password);
             } else {
                 return null;
             }
         } catch (error) {
-            console.log("Error en Pgsq encontrarUser>",error);
+            console.log("Error en Sqlize encontrarUser>",error);
             return null;
         }
     }
@@ -38,6 +38,7 @@ export class SqlizeUserRepository implements UserRepository{
                     user.nombres,
                     user.apellido_paterno,
                     user.apellido_materno,
+                    user.email,
                     user.password
                 )
             )

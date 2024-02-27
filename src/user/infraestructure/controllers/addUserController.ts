@@ -5,8 +5,8 @@ export class AddUserController{
     constructor( readonly addUserUseCase: AddUserUseCase){}
     async run (req: Request, res: Response){
         try {
-            let {name, last_name, password} = req.body;
-            let createdUser = await this.addUserUseCase.run(name, last_name, password);   
+            let {nombres, apellido_paterno, apellido_materno,email, password} = req.body;
+            let createdUser = await this.addUserUseCase.run(nombres, apellido_paterno, apellido_materno, email, password);   
             if (createdUser){
                 return res.status(200).send({
                     status: "success",
@@ -25,6 +25,7 @@ export class AddUserController{
                     message: "Error al Crear Usuario"
                 }) 
             }
+            
         } catch (error) {
             console.log("Error en userController",error);
             res.status(500).send({

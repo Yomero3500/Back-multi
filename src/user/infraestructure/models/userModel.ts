@@ -30,6 +30,11 @@ class UserModel extends Model{
     })
     public apellido_materno!: string;
 
+    @Column({
+        type: DataType.STRING(128),
+        allowNull: false
+    })
+    public email!: string;
 
     @Column({
         type: DataType.STRING,

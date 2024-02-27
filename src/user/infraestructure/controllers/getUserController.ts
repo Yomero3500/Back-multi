@@ -5,9 +5,8 @@ export class GetUserController{
     constructor( readonly getUserUseCase: GetUserUseCase){}
     async run (req: Request, res: Response){
         try {
-            let {id} = req.body;
-            let searchedUser = await this.getUserUseCase.run(id);
-
+            let {nombres, password} = req.body;
+            let searchedUser = await this.getUserUseCase.run(nombres, password);
             if (searchedUser){
                 return res.status(200).send({
                     status: "success",
